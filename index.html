@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVE Risk Panosu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <span class="logo">CVE Risk Panosu</span>
+    <nav>
+      <a href="#panel">Panel</a>
+      <a href="#formula">Risk Formülü</a>
+      <a href="#concepts">Kavramlar</a>
+    </nav>
+  </header>
+
+  <main>    <section id="panel">
+      <h2>Zafiyet Paneli</h2>
+      <p>Bu panelde GitHub Advisory Database üzerinden çekilen güncel güvenlik açıkları listelenir. Her açık kendi risk formülümüzle puanlanır ve en riskli olandan en aza doğru sıralanır. Üstteki sayaçlar her zaman tüm veriyi gösterir; arama kutusu ve filtre ise yalnızca aşağıdaki tabloyu etkiler.</p>
+
+      <div class="counters">
+        <div class="counter critical">Kritik<span id="countCritical">0</span></div>
+        <div class="counter high">Yüksek<span id="countHigh">0</span></div>
+        <div class="counter medium">Orta<span id="countMedium">0</span></div>
+        <div class="counter low">Düşük<span id="countLow">0</span></div>
+      </div>
+
+      <div class="controls">
+        <input id="search" type="text" placeholder="CVE ID veya anahtar kelime ara">
+        <select id="filter">
+          <option value="all">Tüm Seviyeler</option>
+          <option value="Kritik">Kritik</option>
+          <option value="Yüksek">Yüksek</option>
+          <option value="Orta">Orta</option>
+          <option value="Düşük">Düşük</option>
+        </select>
+      </div>
+
+      <p id="status">Yükleniyor...</p>
+      <p id="resultInfo"></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>CVE ID</th>
+            <th>Açıklama</th>
+            <th>CVSS</th>
+            <th>Seviye</th>
+            <th>Risk Skoru</th>
+            <th>Tarih</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </section>    <section id="formula">
+      <h2>Risk Formülü</h2>
+      <p>Her CVE için CVSS puanını temel alan, açığın güncelliğine göre artan 0-100 arası bir risk skoru hesaplıyoruz.</p>
+
+      <div class="formula-box">risk = min(100, CVSS × 10 + urgency_score)</div>
+
+      <p class="formula-term"><strong>CVSS</strong> — açığın 0-10 arası resmi şiddet puanı. Yoksa severity etiketinden tahmini değer kullanılır: Critical=9.0, High=7.0, Medium=5.0, Low=2.0.</p>
+      <p class="formula-term"><strong>urgency_score</strong> — yayın tarihine göre kademeli puan: son 7 gün +15, 8-30 gün arası +10, 30 günden eski +0.</p>
+      <p class="formula-term"><strong>min(100, ...)</strong> — toplam puanın 100'ü geçmesini engeller.</p>
+
+      <table>
+        <thead>
+          <tr><th>Puan</th><th>Seviye</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>80 - 100</td><td class="critical">Kritik</td></tr>
+          <tr><td>60 - 79</td><td class="high">Yüksek</td></tr>
+          <tr><td>40 - 59</td><td class="medium">Orta</td></tr>
+          <tr><td>0 - 39</td><td class="low">Düşük</td></tr>
+        </tbody>
+      </table>
+    </section>    <section id="concepts">
+      <h2>Kavramlar</h2>
+
+      <h3>CVE (Common Vulnerabilities and Exposures)</h3>
+      <p>Yazılım ve sistemlerdeki güvenlik açıkları için uluslararası standart tanımlama sistemidir. Her açık CVE-YIL-NUMARA formatında numaralandırılır (örneğin CVE-2024-1234).</p>
+
+      <h3>CVSS (Common Vulnerability Scoring System)</h3>
+      <p>Güvenlik açıklarının şiddetini 0-10 arasında puanlayan standart sistemdir. 9.0-10 arası Kritik, 7.0-8.9 Yüksek, 4.0-6.9 Orta, 0-3.9 Düşük kabul edilir.</p>
+
+      <h3>GitHub Advisory Database</h3>
+      <p>GitHub'ın yayımladığı açık kaynaklı güvenlik açığı veritabanıdır. CVE ID, CVSS puanı ve şiddet bilgisi içeren kayıtları ücretsiz API aracılığıyla sunar. Bu projede tek veri kaynağı olarak kullanılmıştır.</p>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

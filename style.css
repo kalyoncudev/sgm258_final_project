@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background: whitesmoke;
+  color: black;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: darkslategray;
+  color: white;
+  padding: 14px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+nav a {
+  color: lightgray;
+  text-decoration: none;
+  margin-left: 22px;
+  font-size: 13px;
+}
+
+nav a:hover {
+  color: white;
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+section {
+  background: white;
+  border: 1px solid lightgray;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  scroll-margin-top: 58px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid lightgray;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 16px;
+  margin-bottom: 5px;
+}
+
+p {
+  line-height: 1.6;
+  color: dimgray;
+  margin-bottom: 10px;
+}
+
+.formula-box {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 14px 0 12px 0;
+}
+
+.formula-term {
+  font-size: 13px;
+  color: dimgray;
+  margin-bottom: 6px;
+}
+
+.counters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: bold;
+  background: whitesmoke;
+  border: 1px solid lightgray;
+  min-width: 100px;
+}
+
+.counter span {
+  font-size: 20px;
+}
+
+.counter.critical { color: darkred; }
+.counter.high     { color: red; }
+.counter.medium   { color: orange; }
+.counter.low      { color: gray; }
+
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+#search {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 10px;
+  border: 1px solid lightgray;
+  font-size: 14px;
+}
+
+#search:focus {
+  outline: none;
+  border-color: darkslategray;
+}
+
+#filter {
+  padding: 8px 10px;
+  border: 1px solid lightgray;
+  font-size: 14px;
+  background: white;
+}
+
+#status, #resultInfo {
+  font-size: 13px;
+  color: dimgray;
+  margin-bottom: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  background: whitesmoke;
+  border: 1px solid lightgray;
+  padding: 9px 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid lightgray;
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+tr:hover td {
+  background: whitesmoke;
+}
+
+.critical { color: darkred; font-weight: bold; }
+.high     { color: red; font-weight: bold; }
+.medium   { color: orange; }
+.low      { color: gray; }
+
+@media (max-width: 620px) {
+  .counters    { flex-wrap: wrap; }
+  .controls    { flex-direction: column; }
+  nav a        { margin-left: 12px; }
+}
